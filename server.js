@@ -10,6 +10,14 @@ const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Ritcars backend is running');
+});
+
+app.get('/api/reservations', (req, res) => {
+  res.send('Reservations API is working');
+});
+
 const client = twilio(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
