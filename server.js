@@ -5,6 +5,11 @@ import twilio from 'twilio';
 
 dotenv.config();
 
+console.log('ENV CHECK:', {
+  sid: process.env.TWILIO_ACCOUNT_SID,
+  token: process.env.TWILIO_AUTH_TOKEN ? 'loaded' : 'missing',
+});
+
 const app = express();
 
 app.use(cors({ origin: '*' }));
