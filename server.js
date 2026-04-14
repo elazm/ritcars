@@ -23,13 +23,6 @@ const client = twilio(
   process.env.TWILIO_AUTH_TOKEN
 );
 
-
-// ✅ ADD IT HERE (just above POST)
-app.get('/api/reservations', (req, res) => {
-  res.send('Reservations API is working');
-});
-
-
 app.post('/api/reservations', async (req, res) => {
   try {
     console.log('Incoming reservation:', req.body);
@@ -52,16 +45,16 @@ app.post('/api/reservations', async (req, res) => {
       });
     }
 
-    const whatsappBody = `Nouvelle réservation
+    const whatsappBody = `🚗 Nouvelle réservation
 
-Client: ${fullName}
-Téléphone: ${phone}
-Email: ${email || 'Non renseigné'}
-Voiture: ${car}
-Lieu de retrait: ${pickupLocation}
-Date de retrait: ${pickupDate}
-Date de retour: ${returnDate}
-Message: ${message || 'Aucun'}`;
+👤 Client: ${fullName}
+📞 Téléphone: ${phone}
+📧 Email: ${email || 'Non renseigné'}
+🚘 Voiture: ${car}
+📍 Lieu de retrait: ${pickupLocation}
+📅 Date de retrait: ${pickupDate}
+📅 Date de retour: ${returnDate}
+📝 Message: ${message || 'Aucun'}`;
 
     const twilioMessage = await client.messages.create({
       body: whatsappBody,
