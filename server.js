@@ -2,18 +2,97 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import twilio from 'twilio';
+import rateLimit from 'express-rate-limit';
+import { z } from 'zod';
 
 dotenv.config();
 
 console.log('ENV CHECK:', {
-  sid: process.env.TWILIO_ACCOUNT_SID,
+  sid: process.env.TWILIO_ACCOUNT_SID ? 'loaded' : 'missing',
   token: process.env.TWILIO_AUTH_TOKEN ? 'loaded' : 'missing',
 });
 
 const app = express();
 
-app.use(cors({ origin: '*' }));
+const allowedOrigins = (
+  process.env.ALLOWED_ORIGINS || 'http://localhost:5173,https://ritcars.onrender.com'
+)
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error('Origin not allowed by CORS'));
+    },
+  })
+);
 app.use(express.json());
+
+const reservationRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: Number.parseInt(process.env.RESERVATION_RATE_LIMIT_MAX || '10', 10),
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    error: 'Trop de demandes, veuillez reessayer plus tard.',
+  },
+});
+
+const reservationSchema = z
+  .object({
+    fullName: z.string().trim().min(2).max(100),
+    phone: z
+      .string()
+      .trim()
+      .regex(/^\+?[0-9\s\-()]{8,20}$/, 'Numero de telephone invalide'),
+    email: z.string().trim().email().max(254).optional().or(z.literal('')),
+    car: z.string().trim().min(2).max(100),
+    pickupLocation: z.string().trim().min(2).max(120),
+    pickupDate: z.string().trim().min(10).max(10),
+    returnDate: z.string().trim().min(10).max(10),
+    message: z.string().trim().max(500).optional().or(z.literal('')),
+  })
+  .superRefine((data, ctx) => {
+    const pickup = new Date(data.pickupDate);
+    const back = new Date(data.returnDate);
+
+    if (Number.isNaN(pickup.getTime())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['pickupDate'],
+        message: 'Date de retrait invalide',
+      });
+    }
+
+    if (Number.isNaN(back.getTime())) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['returnDate'],
+        message: 'Date de retour invalide',
+      });
+    }
+
+    if (!Number.isNaN(pickup.getTime()) && !Number.isNaN(back.getTime()) && back <= pickup) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['returnDate'],
+        message: 'La date de retour doit etre apres la date de retrait',
+      });
+    }
+  });
 
 app.get('/', (req, res) => {
   res.send('Ritcars backend is running');
@@ -28,9 +107,17 @@ const client = twilio(
   process.env.TWILIO_AUTH_TOKEN
 );
 
-app.post('/api/reservations', async (req, res) => {
+app.post('/api/reservations', reservationRateLimit, async (req, res) => {
   try {
-    console.log('Incoming reservation:', req.body);
+    const parsedPayload = reservationSchema.safeParse(req.body);
+
+    if (!parsedPayload.success) {
+      return res.status(400).json({
+        success: false,
+        error: 'Donnees de reservation invalides.',
+        details: parsedPayload.error.issues.map((issue) => issue.message),
+      });
+    }
 
     const {
       fullName,
@@ -41,14 +128,9 @@ app.post('/api/reservations', async (req, res) => {
       pickupDate,
       returnDate,
       message,
-    } = req.body;
+    } = parsedPayload.data;
 
-    if (!fullName || !phone || !car || !pickupLocation || !pickupDate || !returnDate) {
-      return res.status(400).json({
-        success: false,
-        error: 'Champs requis manquants.',
-      });
-    }
+    console.log('Incoming reservation accepted for car:', car);
 
     const whatsappBody = `🚗 Nouvelle réservation
 
@@ -78,7 +160,7 @@ app.post('/api/reservations', async (req, res) => {
 
     res.status(500).json({
       success: false,
-      error: error.message || 'Erreur serveur inconnue',
+      error: 'Erreur serveur inconnue',
     });
   }
 });

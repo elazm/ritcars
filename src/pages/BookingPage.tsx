@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 
 const BookingPage = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://ritcars.onrender.com';
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
@@ -79,7 +80,7 @@ const BookingPage = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://ritcars.onrender.com/api/reservations', {
+      const response = await fetch(`${apiBaseUrl}/api/reservations`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
