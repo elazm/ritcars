@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Instagram, Phone } from 'lucide-react';
+import {
+  FaBars as Menu,
+  FaInstagram as Instagram,
+  FaPhone as Phone,
+  FaXmark as X,
+} from 'react-icons/fa6';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,9 +47,9 @@ const Navigation = () => {
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="font-display text-2xl font-bold text-ritcars-white tracking-tight hover:text-ritcars-orange transition-colors"
+            className="hover:opacity-80 transition-opacity"
           >
-            RITCARS
+            <img src="/images/ritcarsvf.png" alt="Ritcars" className="h-12 w-auto" />
           </button>
 
           {/* Right side */}
@@ -86,9 +91,7 @@ const Navigation = () => {
         <div className="h-full flex flex-col">
           {/* Menu header */}
           <div className="flex items-center justify-between px-6 lg:px-12 py-6">
-            <span className="font-display text-2xl font-bold text-ritcars-white">
-              RITCARS
-            </span>
+            <img src="/images/ritcarsvf.png" alt="Ritcars" className="h-12 w-auto" />
             <button
               onClick={() => setIsMenuOpen(false)}
               className="text-ritcars-white hover:text-ritcars-orange transition-colors"

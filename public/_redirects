@@ -1,0 +1,5 @@
+/api/reservations /.netlify/functions/reservations 200
+/api/admin/reservations /.netlify/functions/admin-reservations 200
+/api/admin/reservations/status /.netlify/functions/admin-reservation-status 200
+/api/admin/reservations/delete /.netlify/functions/admin-reservation-delete 200
+/* /index.html 200

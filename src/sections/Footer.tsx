@@ -1,4 +1,9 @@
-import { Phone, Instagram, MapPin, ArrowUp } from 'lucide-react';
+import {
+  FaArrowUp as ArrowUp,
+  FaInstagram as Instagram,
+  FaLocationDot as MapPin,
+  FaPhone as Phone,
+} from 'react-icons/fa6';
 
 const Footer = () => {
   const scrollToTop = () => {

@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import BookingPage from './pages/BookingPage';
 import DiscoverPage from './pages/DiscoverPage';
 import FleetPage from './pages/FleetPage';
+import AdminReservationsPage from './pages/AdminReservationsPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/reservation" element={<BookingPage />} />
         <Route path="/decouvrir-tetouan" element={<DiscoverPage />} />
         <Route path="/flotte" element={<FleetPage />} />
+        <Route path="/admin/reservations" element={<AdminReservationsPage />} />
       </Routes>
     </Router>
   );

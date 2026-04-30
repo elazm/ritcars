@@ -1,24 +1,25 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import {
-  MapPin,
-  Camera,
-  Mountain,
-  Palmtree,
-  Building2,
-  Plane,
-  Clock,
-  ArrowRight,
-  Route,
-  Landmark,
-  Waves,
-  Ship,
-  Crown,
-  Building,
-} from 'lucide-react';
+  FaArrowRight as ArrowRight,
+  FaBuilding as Building,
+  FaBuilding as Building2,
+  FaCamera as Camera,
+  FaClock as Clock,
+  FaCrown as Crown,
+  FaLandmark as Landmark,
+  FaLocationDot as MapPin,
+  FaMountain as Mountain,
+  FaPlaneDeparture as Plane,
+  FaRoute as Route,
+  FaShip as Ship,
+  FaUmbrellaBeach as Palmtree,
+  FaWater as Waves,
+} from 'react-icons/fa6';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,51 +91,51 @@ const DiscoverPage = () => {
 
   const attractions = [
     {
-      name: 'Médina de Tétouan',
-      description: 'Classée UNESCO, ruelles andalouses et souks authentiques.',
+      name: 'Medina de Tetouan',
+      description: 'Classee UNESCO, ruelles andalouses et souks authentiques.',
       icon: Building2,
       highlight: 'Culture & Patrimoine',
       image: '/images/medina-tetouan.png',
     },
     {
       name: 'Palais Royal (Dar El Makhzen)',
-      description: 'Belle façade mauresque sur la Place Hassan II.',
+      description: 'Belle facade mauresque sur la Place Hassan II.',
       icon: Crown,
       highlight: 'Architecture royale',
       image: '/images/palais-royal-tetouan.png',
     },
     {
-      name: 'Place Feddan (Feddan Park)',
-      description: 'Place animée à l’entrée de la médina avec fontaines et palmiers.',
+      name: 'Place Feddan',
+      description: "Place animee a l'entree de la medina avec fontaines et palmiers.",
       icon: Mountain,
       highlight: 'Place & Vie locale',
       image: '/images/place-feddan.png',
     },
     {
-      name: "Musée d'Art Moderne",
+      name: "Musee d'Art Moderne",
       description:
-        "Installé dans un ancien palais, il abrite une collection d'art marocain contemporain.",
+        "Installe dans un ancien palais, il abrite une collection d'art marocain contemporain.",
       icon: Camera,
       highlight: 'Art & Culture',
       image: '/images/musee-art-moderne-tetouan.png',
     },
     {
       name: 'Plage de Martil',
-      description: 'Plage la plus proche, longue et animée.',
+      description: 'Plage la plus proche, longue et animee.',
       icon: Waves,
-      highlight: 'Plage & Animée',
+      highlight: 'Plage & Animee',
       image: '/images/plage-martil.png',
     },
     {
-      name: 'Plage de M’Diq',
+      name: "Plage de M'Diq",
       description: 'Belle plage, port et promenade.',
       icon: Palmtree,
-      highlight: 'Plage & Détente',
+      highlight: 'Plage & Detente',
       image: '/images/plage-mdiq.png',
     },
     {
       name: 'Cabo Negro',
-      description: 'Station balnéaire chic avec plage et golfs.',
+      description: 'Station balneaire chic avec plage et golfs.',
       icon: MapPin,
       highlight: 'Plage & Luxe',
       image: '/images/cabo-negro.png',
@@ -154,7 +155,7 @@ const DiscoverPage = () => {
       distance: '60 km',
       duration: '1h',
       description:
-        'Ville cosmopolite au détroit de Gibraltar. Visitez la médina, la Kasbah et la nouvelle marina.',
+        'Ville cosmopolite au detroit de Gibraltar. Visitez la medina, la Kasbah et la nouvelle marina.',
       image: '/images/Tangier.png',
       icon: MapPin,
     },
@@ -163,16 +164,16 @@ const DiscoverPage = () => {
       distance: '65 km',
       duration: '1h 15min',
       description:
-        'La ville bleue perchée dans les montagnes du Rif. Un site incontournable pour les photographes.',
+        'La ville bleue perchee dans les montagnes du Rif. Un site incontournable pour les photographes.',
       image: '/images/Chefchaouen.png',
       icon: Mountain,
     },
     {
-      destination: 'Al Hoceïma',
+      destination: 'Al Hoceima',
       distance: '180 km',
       duration: '2h 30min',
       description:
-        "Belle ville côtière avec des plages magnifiques et le parc national d'Al Hoceïma.",
+        "Belle ville cotiere avec des plages magnifiques et le parc national d'Al Hoceima.",
       image: '/images/AlHoceima.png',
       icon: Waves,
     },
@@ -181,7 +182,7 @@ const DiscoverPage = () => {
       distance: '90 km',
       duration: '1h 15min',
       description:
-        'Petite ville fortifiée connue pour ses fresques murales et son festival des arts.',
+        'Petite ville fortifiee connue pour ses fresques murales et son festival des arts.',
       image: '/images/Asilah.png',
       icon: Building2,
     },
@@ -190,16 +191,16 @@ const DiscoverPage = () => {
       distance: '110 km',
       duration: '1h 30min',
       description:
-        'Ville côtière avec une riche histoire phénicienne, romaine et arabe.',
+        'Ville cotiere avec une riche histoire phenicienne, romaine et arabe.',
       image: '/images/Larach.png',
       icon: Landmark,
     },
     {
-      destination: 'Rabat Capital',
+      destination: 'Rabat',
       distance: '275 km',
       duration: '3h 30min',
       description:
-        'Capitale du Maroc, entre patrimoine historique, institutions et front de mer élégant.',
+        'Capitale du Maroc, entre patrimoine historique, institutions et front de mer elegant.',
       image: '/images/Rabatcapital.png',
       icon: Building,
     },
@@ -208,7 +209,7 @@ const DiscoverPage = () => {
       distance: '360 km',
       duration: '4h 15min',
       description:
-        'Métropole moderne du Maroc, célèbre pour sa corniche, son énergie urbaine et Hassan II.',
+        'Metropole moderne du Maroc, celebre pour sa corniche, son energie urbaine et Hassan II.',
       image: '/images/Casablanca.png',
       icon: Building2,
     },
@@ -217,7 +218,7 @@ const DiscoverPage = () => {
       distance: '590 km',
       duration: '6h 30min',
       description:
-        'Ville impériale vibrante, connue pour ses souks, palais, jardins et atmosphère unique.',
+        'Ville imperiale vibrante, connue pour ses souks, palais, jardins et atmosphere unique.',
       image: '/images/Marrakech.png',
       icon: Crown,
     },
@@ -225,39 +226,37 @@ const DiscoverPage = () => {
 
   const airports = [
     {
-      name: 'Aéroport de Tétouan',
+      name: 'Aeroport de Tetouan',
       code: 'TTU',
       distance: '5 km du centre',
       duration: '10 min',
-      description:
-        'Aéroport le plus proche, vols domestiques et internationaux limités.',
+      description: 'Aeroport le plus proche, vols domestiques et internationaux limites.',
       icon: Plane,
     },
     {
-      name: 'Aéroport de Tanger',
+      name: 'Aeroport de Tanger',
       code: 'TNG',
       distance: '65 km',
       duration: '1h',
       description:
-        'Aéroport international principal de la région avec de nombreuses destinations.',
+        'Aeroport international principal de la region avec de nombreuses destinations.',
       icon: Plane,
     },
     {
-      name: 'Aéroport Mohamed 5, Casablanca',
+      name: 'Aeroport Mohamed V, Casablanca',
       code: 'CMN',
       distance: '380 km',
       duration: '4h 20min',
-      description:
-        'Principal hub aérien du Maroc avec un large réseau international.',
+      description: 'Principal hub aerien du Maroc avec un large reseau international.',
       icon: Plane,
     },
     {
-      name: 'Aéroport Marrakech, Ménara',
+      name: 'Aeroport Marrakech Menara',
       code: 'RAK',
       distance: '600 km',
       duration: '6h 40min',
       description:
-        'Aéroport international majeur, pratique pour les liaisons touristiques.',
+        'Aeroport international majeur, pratique pour les liaisons touristiques.',
       icon: Plane,
     },
   ];
@@ -266,75 +265,71 @@ const DiscoverPage = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      <section className="relative pt-28 pb-16 bg-ritcars-black overflow-hidden">
+      <section className="relative overflow-hidden bg-ritcars-black pt-28 pb-16">
         <div className="absolute inset-0 opacity-30">
-          <img
-            src="/images/carwhite.png"
-            alt="Tétouan"
-            className="w-full h-full object-cover"
-          />
+          <img src="/images/carwhite.png" alt="Tetouan" className="h-full w-full object-cover" />
         </div>
 
         <div
           ref={headerRef}
-          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+          className="relative max-w-7xl mx-auto px-4 text-center sm:px-6 lg:px-8"
         >
-          <span className="inline-block bg-ritcars-orange/20 text-ritcars-orange px-4 py-2 rounded-full text-sm font-medium mb-4">
+          <span className="mb-4 inline-block rounded-full bg-ritcars-orange/20 px-4 py-2 text-sm font-medium text-ritcars-orange">
             Guide de voyage
           </span>
 
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            Découvrir <span className="text-ritcars-orange">Tétouan</span>
+          <h1 className="mb-4 font-display text-4xl font-bold text-white md:text-5xl lg:text-6xl">
+            Decouvrir <span className="text-ritcars-orange">Tetouan</span>
           </h1>
 
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-            La perle du nord du Maroc, entre médina andalouse et montagnes du Rif.
+          <p className="mx-auto max-w-2xl text-lg text-gray-300">
+            La perle du nord du Maroc, entre medina andalouse et montagnes du Rif.
           </p>
         </div>
       </section>
 
       <section ref={attractionsRef} className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-ritcars-orange font-medium text-sm uppercase tracking-wider">
-              À voir
+          <div className="mb-12 text-center">
+            <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">
+              A voir
             </span>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-ritcars-black mt-2">
-              Les incontournables de Tétouan
+            <h2 className="mt-2 font-display text-3xl font-bold text-ritcars-black md:text-4xl">
+              Les incontournables de Tetouan
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {attractions.map((attraction, index) => (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {attractions.map((attraction) => (
               <div
-                key={index}
-                className="attraction-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100"
+                key={attraction.name}
+                className="attraction-card overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-lg"
               >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
                     src={attraction.image}
                     alt={attraction.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </div>
 
                 <div className="p-5">
-                  <div className="flex items-start justify-between gap-3 mb-3">
-                    <div className="w-10 h-10 bg-ritcars-orange/10 rounded-lg flex items-center justify-center shrink-0">
-                      <attraction.icon className="w-5 h-5 text-ritcars-orange" />
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ritcars-orange/10">
+                      <attraction.icon className="h-5 w-5 text-ritcars-orange" />
                     </div>
 
-                    <span className="text-[11px] font-medium text-ritcars-orange bg-ritcars-orange/10 px-3 py-1 rounded-full text-right">
+                    <span className="rounded-full bg-ritcars-orange/10 px-3 py-1 text-right text-[11px] font-medium text-ritcars-orange">
                       {attraction.highlight}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-lg font-bold text-ritcars-black leading-tight mb-2">
+                  <h3 className="mb-2 font-display text-lg font-bold leading-tight text-ritcars-black">
                     {attraction.name}
                   </h3>
 
-                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                  <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">
                     {attraction.description}
                   </p>
                 </div>
@@ -344,62 +339,62 @@ const DiscoverPage = () => {
         </div>
       </section>
 
-      <section ref={routesRef} className="py-16 md:py-24 bg-gray-50">
+      <section ref={routesRef} className="bg-gray-50 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-11">
-            <span className="text-ritcars-orange font-medium text-sm uppercase tracking-wider">
+          <div className="mb-11 text-center">
+            <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">
               Excursions
             </span>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-ritcars-black mt-2">
-              Routes depuis Tétouan
+            <h2 className="mt-2 font-display text-3xl font-bold text-ritcars-black md:text-4xl">
+              Routes depuis Tetouan
             </h2>
 
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+            <p className="mx-auto mt-4 max-w-2xl text-gray-600">
               Avec votre voiture de location, explorez les magnifiques destinations des environs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {routes.map((route, index) => (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {routes.map((route) => (
               <div
-                key={index}
-                className="route-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100"
+                key={route.destination}
+                className="route-card overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-lg"
               >
                 <div className="aspect-[16/9] overflow-hidden">
                   <img
                     src={route.image}
                     alt={route.destination}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </div>
 
                 <div className="p-5">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="w-10 h-10 bg-ritcars-orange/10 rounded-lg flex items-center justify-center shrink-0">
-                      <route.icon className="w-5 h-5 text-ritcars-orange" />
+                  <div className="mb-3 flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ritcars-orange/10">
+                      <route.icon className="h-5 w-5 text-ritcars-orange" />
                     </div>
 
                     <div className="min-w-0">
-                      <h3 className="font-display text-lg font-bold text-ritcars-black leading-tight">
+                      <h3 className="font-display text-lg font-bold leading-tight text-ritcars-black">
                         {route.destination}
                       </h3>
 
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-xs text-gray-500">
+                      <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-500">
                         <span className="flex items-center gap-1">
-                          <Route className="w-4 h-4" />
+                          <Route className="h-4 w-4" />
                           {route.distance}
                         </span>
 
                         <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
+                          <Clock className="h-4 w-4" />
                           {route.duration}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                  <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">
                     {route.description}
                   </p>
                 </div>
@@ -411,55 +406,55 @@ const DiscoverPage = () => {
 
       <section ref={airportsRef} className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-ritcars-orange font-medium text-sm uppercase tracking-wider">
-              Accès
+          <div className="mb-12 text-center">
+            <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">
+              Acces
             </span>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-ritcars-black mt-2">
-              Aéroports à proximité
+            <h2 className="mt-2 font-display text-3xl font-bold text-ritcars-black md:text-4xl">
+              Aeroports a proximite
             </h2>
 
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
-              Nous pouvons vous livrer votre voiture directement à l'aéroport.
+            <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+              Nous pouvons vous livrer votre voiture directement a l'aeroport.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {airports.map((airport, index) => (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
+            {airports.map((airport) => (
               <div
-                key={index}
-                className="airport-card bg-white rounded-2xl p-5 shadow-sm hover:shadow-lg transition-shadow border border-gray-100"
+                key={airport.code}
+                className="airport-card rounded-2xl border border-gray-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-lg"
               >
-                <div className="flex items-start gap-3 mb-4">
-                  <div className="w-12 h-12 bg-ritcars-orange/10 rounded-xl flex items-center justify-center shrink-0">
-                    <airport.icon className="w-6 h-6 text-ritcars-orange" />
+                <div className="mb-4 flex items-start gap-3">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ritcars-orange/10">
+                    <airport.icon className="h-6 w-6 text-ritcars-orange" />
                   </div>
 
                   <div className="min-w-0">
-                    <h3 className="font-display text-lg font-bold text-ritcars-black leading-tight">
+                    <h3 className="font-display text-lg font-bold leading-tight text-ritcars-black">
                       {airport.name}
                     </h3>
 
-                    <span className="text-ritcars-orange text-sm font-mono font-bold">
+                    <span className="font-mono text-sm font-bold text-ritcars-orange">
                       {airport.code}
                     </span>
                   </div>
                 </div>
 
-                <div className="space-y-2 text-sm text-gray-600 mb-4">
+                <div className="mb-4 space-y-2 text-sm text-gray-600">
                   <p className="flex items-center gap-2">
-                    <Route className="w-4 h-4 text-gray-400 shrink-0" />
+                    <Route className="h-4 w-4 shrink-0 text-gray-400" />
                     {airport.distance}
                   </p>
 
                   <p className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-gray-400 shrink-0" />
+                    <Clock className="h-4 w-4 shrink-0 text-gray-400" />
                     {airport.duration} en voiture
                   </p>
                 </div>
 
-                <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
+                <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">
                   {airport.description}
                 </p>
               </div>
@@ -468,23 +463,23 @@ const DiscoverPage = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-ritcars-orange">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display text-3xl font-bold text-white mb-4">
-            Prêt à explorer Tétouan ?
+      <section className="bg-ritcars-orange py-16">
+        <div className="max-w-4xl mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="mb-4 font-display text-3xl font-bold text-white">
+            Pret a explorer Tetouan ?
           </h2>
 
-          <p className="text-white/90 text-lg mb-8">
-            Réservez votre voiture dès maintenant et commencez votre aventure.
+          <p className="mb-8 text-lg text-white/90">
+            Reservez votre voiture des maintenant et commencez votre aventure.
           </p>
 
-          <a
-            href="/reservation"
-            className="inline-flex items-center gap-2 bg-white text-ritcars-orange px-10 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
+          <Link
+            to="/reservation"
+            className="inline-flex items-center gap-2 rounded-xl bg-white px-10 py-4 font-semibold text-ritcars-orange transition-colors hover:bg-gray-100"
           >
-            Réserver maintenant
-            <ArrowRight className="w-5 h-5" />
-          </a>
+            Reserver maintenant
+            <ArrowRight className="h-5 w-5" />
+          </Link>
         </div>
       </section>
 

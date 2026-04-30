@@ -1,7 +1,7 @@
 import { useEffect, useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight } from 'lucide-react';
+import { FaArrowRight as ArrowRight } from 'react-icons/fa6';
 
 gsap.registerPlugin(ScrollTrigger);
 

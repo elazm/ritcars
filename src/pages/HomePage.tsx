@@ -4,7 +4,14 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { Car, Shield, Clock, MapPin, ChevronRight, Star, Phone } from 'lucide-react';
+import {
+  FaCarSide as Car,
+  FaChevronRight as ChevronRight,
+  FaClock as Clock,
+  FaLocationDot as MapPin,
+  FaShieldHalved as Shield,
+  FaStar as Star,
+} from 'react-icons/fa6';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,18 +84,18 @@ const HomePage = () => {
   const features = [
     {
       icon: Clock,
-      title: 'Disponibilité 24/7',
-      description: 'Service client disponible à tout moment pour vous assister.',
+      title: 'Disponibilite 24/7',
+      description: 'Service client disponible a tout moment pour vous assister.',
     },
     {
       icon: Shield,
       title: 'Assurance incluse',
-      description: 'Tous nos véhicules sont assurés pour votre tranquillité.',
+      description: 'Tous nos vehicules sont assures pour votre tranquillite.',
     },
     {
       icon: MapPin,
-      title: 'Kilométrage illimité',
-      description: 'Roulez sans souci avec notre offre de kilométrage illimité.',
+      title: 'Kilometrage illimite',
+      description: 'Roulez sans souci avec notre offre de kilometrage illimite.',
     },
   ];
 
@@ -102,143 +109,122 @@ const HomePage = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden"
+        className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Hero Content */}
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div className="hero-content">
-              <span className="inline-block bg-ritcars-orange/10 text-ritcars-orange px-4 py-2 rounded-full text-sm font-medium mb-6">
-                Location de voitures à Tétouan
+              <span className="mb-6 inline-block rounded-full bg-ritcars-orange/10 px-4 py-2 text-sm font-medium text-ritcars-orange">
+                Location de voitures a Tetouan
               </span>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-ritcars-black mb-6 leading-tight">
-                Louez une voiture et{' '}
-                <span className="text-ritcars-orange">explorez</span> le Royaume
+              <h1 className="mb-6 font-display text-4xl font-bold leading-tight text-ritcars-black md:text-5xl lg:text-6xl">
+                Louez une voiture et <span className="text-ritcars-orange">explorez</span> le
+                Royaume
               </h1>
 
-              <p className="text-gray-600 text-lg mb-8 max-w-lg">
-                Des véhicules Dacia récents, propres et bien entretenus. Prix fixe à
+              <p className="mb-8 max-w-lg text-lg text-gray-600">
+                Des vehicules Dacia recents, propres et bien entretenus. Prix fixe a
                 350 MAD/jour, sans surprises.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/reservation"
-                  className="bg-ritcars-orange text-white px-8 py-4 rounded-xl font-semibold text-center hover:bg-ritcars-orange/90 transition-colors"
+                  className="rounded-xl bg-ritcars-orange px-8 py-4 text-center font-semibold text-white transition-colors hover:bg-ritcars-orange/90"
                 >
-                  Réserver maintenant
+                  Reserver maintenant
                 </Link>
 
                 <Link
                   to="/flotte"
-                  className="border-2 border-ritcars-black text-ritcars-black px-8 py-4 rounded-xl font-semibold text-center hover:bg-ritcars-black hover:text-white transition-colors"
+                  className="rounded-xl border-2 border-ritcars-black px-8 py-4 text-center font-semibold text-ritcars-black transition-colors hover:bg-ritcars-black hover:text-white"
                 >
                   Voir nos voitures
                 </Link>
               </div>
             </div>
 
-            {/* Hero Image */}
             <div className="hero-content relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                 <img
                   src="/images/dacia-stepway-grey.jpg"
-                  alt="Dacia Sandero"
+                  alt="Dacia Sandero Stepway"
                   className="w-full h-auto"
                 />
 
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
                   <div className="flex items-center gap-2 text-white">
-                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star className="size-5 shrink-0 fill-yellow-400 text-yellow-400" />
                     <span className="font-semibold">4.9/5</span>
-                    <span className="text-white/80">basé sur 200+ avis</span>
+                    <span className="text-white/80">base sur 200+ avis</span>
                   </div>
                 </div>
               </div>
-
-              {/* Floating badge */}
-              <div className="absolute -bottom-12 -left-4 bg-white shadow-lg rounded-xl p-4 flex items-center gap-3 border border-gray-100">
-                <div className="w-12 h-12 bg-ritcars-orange/10 rounded-full flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-ritcars-orange" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">Appelez-nous</p>
-                  <a
-                    href="tel:0762253818"
-                    className="font-semibold text-ritcars-black hover:text-ritcars-orange transition-colors"
-                  >
-                    0762253818
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
       <section ref={statsRef} className="bg-ritcars-black py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="stat-item text-center">
-              <p className="font-display text-4xl md:text-5xl font-bold text-ritcars-orange mb-2">
+              <p className="mb-2 font-display text-4xl font-bold text-ritcars-orange md:text-5xl">
                 7
               </p>
-              <p className="text-gray-400 text-sm">Véhicules</p>
+              <p className="text-sm text-gray-400">Vehicules</p>
             </div>
 
             <div className="stat-item text-center">
-              <p className="font-display text-4xl md:text-5xl font-bold text-ritcars-orange mb-2">
+              <p className="mb-2 font-display text-4xl font-bold text-ritcars-orange md:text-5xl">
                 170+
               </p>
-              <p className="text-gray-400 text-sm">Clients satisfaits</p>
+              <p className="text-sm text-gray-400">Clients satisfaits</p>
             </div>
 
             <div className="stat-item text-center">
-              <p className="font-display text-4xl md:text-5xl font-bold text-ritcars-orange mb-2">
+              <p className="mb-2 font-display text-4xl font-bold text-ritcars-orange md:text-5xl">
                 2+
               </p>
-              <p className="text-gray-400 text-sm">Années d'expérience</p>
+              <p className="text-sm text-gray-400">Annees d'experience</p>
             </div>
 
             <div className="stat-item text-center">
-              <p className="font-display text-4xl md:text-5xl font-bold text-ritcars-orange mb-2">
+              <p className="mb-2 font-display text-4xl font-bold text-ritcars-orange md:text-5xl">
                 24/7
               </p>
-              <p className="text-gray-400 text-sm">Assistance</p>
+              <p className="text-sm text-gray-400">Assistance</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section ref={featuresRef} className="py-16 md:py-24 bg-gray-50">
+      <section ref={featuresRef} className="bg-gray-50 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-ritcars-orange font-medium text-sm uppercase tracking-wider">
+          <div className="mb-12 text-center">
+            <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">
               Pourquoi nous choisir
             </span>
 
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-ritcars-black mt-2">
+            <h2 className="mt-2 font-display text-3xl font-bold text-ritcars-black md:text-4xl">
               Les avantages Ritcars
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {features.map((feature) => (
               <div
-                key={index}
-                className="feature-card bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition-shadow"
+                key={feature.title}
+                className="feature-card rounded-2xl bg-white p-8 shadow-sm transition-shadow hover:shadow-lg"
               >
-                <div className="w-14 h-14 bg-ritcars-orange/10 rounded-xl flex items-center justify-center mb-6">
-                  <feature.icon className="w-7 h-7 text-ritcars-orange" />
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-ritcars-orange/10">
+                  <feature.icon className="size-7 shrink-0 text-ritcars-orange" />
                 </div>
 
-                <h3 className="font-display text-xl font-bold text-ritcars-black mb-3">
+                <h3 className="mb-3 font-display text-xl font-bold text-ritcars-black">
                   {feature.title}
                 </h3>
 
@@ -249,69 +235,66 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Cars Section */}
       <section ref={carsRef} className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+          <div className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-ritcars-orange font-medium text-sm uppercase tracking-wider">
+              <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">
                 Notre flotte
               </span>
 
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-ritcars-black mt-2">
+              <h2 className="mt-2 font-display text-3xl font-bold text-ritcars-black md:text-4xl">
                 Choisissez votre voiture
               </h2>
             </div>
 
             <Link
               to="/flotte"
-              className="flex items-center gap-2 text-ritcars-orange font-medium mt-4 md:mt-0 hover:underline"
+              className="mt-4 flex items-center gap-2 font-medium text-ritcars-orange hover:underline md:mt-0"
             >
               Voir toutes les voitures
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="size-5 shrink-0" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {cars.map((car, index) => (
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {cars.map((car) => (
               <div
-                key={index}
-                className="car-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
+                key={car.name}
+                className="car-card overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl"
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={car.image}
                     alt={car.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </div>
 
                 <div className="p-6">
-                  <h3 className="font-display text-xl font-bold text-ritcars-black mb-2">
+                  <h3 className="mb-2 font-display text-xl font-bold text-ritcars-black">
                     {car.name}
                   </h3>
 
-                  <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                  <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
                     <span className="flex items-center gap-1">
-                      <Car className="w-4 h-4" /> 5 places
+                      <Car className="size-4 shrink-0" /> 5 places
                     </span>
                     <span>Manuelle</span>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t">
+                  <div className="flex items-center justify-between border-t pt-4">
                     <div>
-                      <span className="text-gray-500 text-sm">À partir de</span>
                       <p className="font-display text-2xl font-bold text-ritcars-orange">
-                        {car.price}{' '}
-                        <span className="text-sm text-gray-500">MAD/jour</span>
+                        {car.price} <span className="text-sm text-gray-500">MAD/jour</span>
                       </p>
                     </div>
 
                     <Link
                       to="/reservation"
-                      className="bg-ritcars-black text-white px-5 py-2.5 rounded-lg font-medium hover:bg-ritcars-orange transition-colors"
+                      className="rounded-lg bg-ritcars-black px-5 py-2.5 font-medium text-white transition-colors hover:bg-ritcars-orange"
                     >
-                      Réserver
+                      Reserver
                     </Link>
                   </div>
                 </div>
@@ -321,23 +304,21 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-ritcars-orange">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-            Prêt à partir à l'aventure ?
+      <section className="bg-ritcars-orange py-16 md:py-24">
+        <div className="max-w-4xl mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="mb-4 font-display text-3xl font-bold text-white md:text-4xl">
+            Pret a partir a l'aventure ?
           </h2>
 
-          <p className="text-white/90 text-lg mb-8">
-            Réservez votre voiture dès maintenant et découvrez Tétouan et ses
-            environs.
+          <p className="mb-8 text-lg text-white/90">
+            Reservez votre voiture des maintenant et decouvrez Tetouan et ses environs.
           </p>
 
           <Link
             to="/reservation"
-            className="inline-block bg-white text-ritcars-orange px-10 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
+            className="inline-block rounded-xl bg-white px-10 py-4 font-semibold text-ritcars-orange transition-colors hover:bg-gray-100"
           >
-            Réserver maintenant
+            Reserver maintenant
           </Link>
         </div>
       </section>

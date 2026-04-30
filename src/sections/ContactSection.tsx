@@ -1,7 +1,13 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Phone, Instagram, MapPin, Send, Check } from 'lucide-react';
+import {
+  FaCheck as Check,
+  FaInstagram as Instagram,
+  FaLocationDot as MapPin,
+  FaPaperPlane as Send,
+  FaPhone as Phone,
+} from 'react-icons/fa6';
 
 gsap.registerPlugin(ScrollTrigger);
 

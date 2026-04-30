@@ -1,7 +1,14 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Users, DoorOpen, Gauge, Snowflake, Bluetooth, ArrowRight } from 'lucide-react';
+import {
+  FaArrowRight as ArrowRight,
+  FaBluetooth as Bluetooth,
+  FaDoorOpen as DoorOpen,
+  FaGaugeHigh as Gauge,
+  FaSnowflake as Snowflake,
+  FaUsers as Users,
+} from 'react-icons/fa6';
 
 gsap.registerPlugin(ScrollTrigger);
 
