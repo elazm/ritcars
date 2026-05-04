@@ -6,6 +6,8 @@ import {
 } from 'react-icons/fa6';
 
 const Footer = () => {
+  const googleMapsUrl = 'https://maps.app.goo.gl/3RabpB7KomELm1og7';
+
   return (
     <footer className="bg-ritcars-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -97,10 +99,15 @@ const Footer = () => {
 
           <div>
             <h4 className="mb-4 font-semibold">Adresse</h4>
-            <div className="flex items-start gap-2 text-sm text-gray-400">
+            <a
+              href={googleMapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-2 text-sm text-gray-400 transition-colors hover:text-ritcars-orange"
+            >
               <MapPin className="mt-0.5 size-4 shrink-0" />
               <span>Lotissement Alia 3 Lot 102 Touilaa - Tetouan</span>
-            </div>
+            </a>
           </div>
         </div>
 

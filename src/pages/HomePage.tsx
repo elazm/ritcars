@@ -105,6 +105,10 @@ const HomePage = () => {
     { name: 'Dacia Logan', image: '/images/dacia-logan.jpg', price: 350 },
   ];
 
+  const googleMapsUrl = 'https://maps.app.goo.gl/3RabpB7KomELm1og7';
+  const googleMapsEmbedUrl =
+    'https://www.google.com/maps?q=Ritcars%20Lotissement%20Alia%203%20Lot%20102%20Touilaa%20Tetouan%20Morocco&output=embed';
+
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
@@ -300,6 +304,61 @@ const HomePage = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="bg-gray-50 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div>
+              <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">
+                Notre agence
+              </span>
+
+              <h2 className="mt-2 font-display text-3xl font-bold text-ritcars-black md:text-4xl">
+                Trouvez Ritcars a Tetouan
+              </h2>
+
+              <p className="mt-4 max-w-lg text-gray-600">
+                Venez recuperer votre voiture directement a notre agence, ou ouvrez
+                l'itineraire dans Google Maps pour arriver plus facilement.
+              </p>
+
+              <div className="mt-8 flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ritcars-orange/10">
+                  <MapPin className="size-5 text-ritcars-orange" />
+                </div>
+
+                <div>
+                  <p className="font-semibold text-ritcars-black">Adresse</p>
+                  <p className="mt-1 text-gray-600">
+                    Lotissement Alia 3 Lot 102 Touilaa - Tetouan
+                  </p>
+                </div>
+              </div>
+
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 rounded-xl bg-ritcars-orange px-6 py-3 font-semibold text-white transition-colors hover:bg-ritcars-orange/90"
+              >
+                <MapPin className="size-4 shrink-0" />
+                Ouvrir Google Maps
+              </a>
+            </div>
+
+            <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+              <iframe
+                title="Carte Ritcars Tetouan"
+                src={googleMapsEmbedUrl}
+                className="h-[360px] w-full border-0 md:h-[460px]"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
           </div>
         </div>
       </section>
