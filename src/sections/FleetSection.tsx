@@ -23,69 +23,120 @@ const fleetCars = [
     image: '/images/dacia-sandero.jpg',
     seats: 5,
     doors: 5,
-    transmission: 'Manual',
+    transmission: 'Manuelle',
+    fuel: 'Essence',
     features: ['A/C', 'USB', 'Bluetooth'],
     price: 280,
   },
   {
     id: 2,
-    name: 'Dacia Sandero',
-    image: '/images/dacia-sandero.jpg',
+    name: 'Dacia Sandero Stepway',
+    image: '/images/dacia-stepway.jpg',
     seats: 5,
     doors: 5,
-    transmission: 'Manual',
-    features: ['A/C', 'USB', 'Bluetooth'],
-    price: 280,
+    transmission: 'Manuelle',
+    fuel: 'Essence',
+    features: ['A/C', 'USB', 'Bluetooth', 'Roof Rails'],
+    price: 320,
   },
   {
     id: 3,
-    name: 'Dacia Sandero',
-    image: '/images/dacia-sandero.jpg',
-    seats: 5,
-    doors: 5,
-    transmission: 'Manual',
-    features: ['A/C', 'USB', 'Bluetooth'],
-    price: 280,
-  },
-  {
-    id: 4,
-    name: 'Dacia Sandero Stepway',
-    image: '/images/dacia-stepway.jpg',
-    seats: 5,
-    doors: 5,
-    transmission: 'Manual',
-    features: ['A/C', 'USB', 'Bluetooth', 'Roof Rails'],
-    price: 320,
-  },
-  {
-    id: 5,
-    name: 'Dacia Sandero Stepway',
-    image: '/images/dacia-stepway.jpg',
-    seats: 5,
-    doors: 5,
-    transmission: 'Manual',
-    features: ['A/C', 'USB', 'Bluetooth', 'Roof Rails'],
-    price: 320,
-  },
-  {
-    id: 6,
     name: 'Dacia Logan',
     image: '/images/dacia-logan.jpg',
     seats: 5,
     doors: 4,
-    transmission: 'Manual',
-    features: ['A/C', 'USB', 'Bluetooth', 'Large Trunk'],
+    transmission: 'Manuelle',
+    fuel: 'Essence',
+    features: ['A/C', 'USB', 'Bluetooth', 'Grand Coffre'],
+    price: 300,
+  },
+  {
+    id: 4,
+    name: 'Dacia Duster',
+    image: '/images/Daciaduster1.png',
+    seats: 5,
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Diesel',
+    features: ['A/C', 'USB', 'Bluetooth', '4x4'],
+    price: 400,
+  },
+  {
+    id: 5,
+    name: 'Dacia Jogger',
+    image: '/images/Daciajogger1.png',
+    seats: 7,
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Diesel',
+    features: ['A/C', 'USB', 'Bluetooth', '7 Places'],
+    price: 400,
+  },
+  {
+    id: 6,
+    name: 'Peugeot 208',
+    image: '/images/peugeot2081.png',
+    seats: 5,
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Essence',
+    features: ['A/C', 'USB', 'Bluetooth', 'Caméra'],
     price: 300,
   },
   {
     id: 7,
-    name: 'Dacia Logan',
-    image: '/images/dacia-logan.jpg',
+    name: 'Peugeot 2008',
+    image: '/images/peugeot20081.png',
     seats: 5,
-    doors: 4,
-    transmission: 'Manual',
-    features: ['A/C', 'USB', 'Bluetooth', 'Large Trunk'],
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Essence',
+    features: ['A/C', 'USB', 'Bluetooth', 'SUV'],
+    price: 500,
+  },
+  {
+    id: 8,
+    name: 'Renault Clio 5',
+    image: '/images/Clio51.png',
+    seats: 5,
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Essence',
+    features: ['A/C', 'USB', 'Bluetooth', 'Écran tactile'],
     price: 300,
+  },
+  {
+    id: 9,
+    name: 'Renault Clio 5',
+    image: '/images/Clio51.png',
+    seats: 5,
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Diesel',
+    features: ['A/C', 'USB', 'Bluetooth', 'Écran tactile'],
+    price: 250,
+  },
+  {
+    id: 10,
+    name: 'Seat Ibiza',
+    image: '/images/Seatibiza1.png',
+    seats: 5,
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Essence',
+    features: ['A/C', 'USB', 'Bluetooth', 'Sport'],
+    price: 400,
+  },
+  {
+    id: 11,
+    name: 'Citroën C3 Aircross',
+    image: '/images/Citroenc3aircross.png',
+    seats: 5,
+    doors: 5,
+    transmission: 'Manuelle',
+    fuel: 'Essence',
+    features: ['A/C', 'USB', 'Bluetooth', 'SUV'],
+    price: 450,
   },
 ];
 
@@ -162,10 +213,10 @@ const FleetSection = ({ className = '' }: FleetSectionProps) => {
             Our Fleet
           </span>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-ritcars-white mb-4">
-            7 Dacia Vehicles
+            11 Véhicules
           </h2>
           <p className="text-ritcars-gray text-lg max-w-2xl">
-            Manual · Air conditioning · USB · Bluetooth · 5 seats
+            Essence & Diesel · Climatisation · USB · Bluetooth
           </p>
         </div>
 
@@ -208,6 +259,11 @@ const FleetSection = ({ className = '' }: FleetSectionProps) => {
                   <div className="flex items-center gap-1.5 text-ritcars-gray text-sm">
                     <Gauge className="w-4 h-4" />
                     <span>{car.transmission}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-ritcars-gray text-sm">
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${car.fuel === 'Diesel' ? 'bg-blue-500/20 text-blue-300' : 'bg-green-500/20 text-green-300'}`}>
+                      {car.fuel}
+                    </span>
                   </div>
                 </div>
 
