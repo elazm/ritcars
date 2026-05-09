@@ -53,68 +53,108 @@ const FleetPage = () => {
       seats: 5,
       doors: 5,
       transmission: 'Manuelle',
-      features: ['Climatisation', 'USB', 'Bluetooth'],
-      price: 350,
+      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
+      price: 280,
     },
     {
       id: 2,
-      name: 'Dacia Sandero',
-      image: '/images/dacia-sandero.jpg',
+      name: 'Dacia Sandero Stepway',
+      image: '/images/dacia-stepway-grey.jpg',
       seats: 5,
       doors: 5,
       transmission: 'Manuelle',
-      features: ['Climatisation', 'USB', 'Bluetooth'],
-      price: 350,
+      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'Barres de toit'],
+      price: 320,
     },
     {
       id: 3,
-      name: 'Dacia Sandero Stepway',
-      image: '/images/dacia-stepway-grey.jpg',
-      seats: 5,
-      doors: 5,
-      transmission: 'Boite automatique',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
-      price: 350,
-    },
-    {
-      id: 4,
-      name: 'Dacia Sandero Stepway',
-      image: '/images/dacia-stepway-grey.jpg',
-      seats: 5,
-      doors: 5,
-      transmission: 'Boite automatique',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'Barres de toit'],
-      price: 350,
-    },
-    {
-      id: 5,
-      name: 'Dacia Sandero Stepway',
-      image: '/images/dacia-stepway-black.jpg',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Climatisation', 'USB', 'Bluetooth', 'Barres de toit'],
-      price: 350,
-    },
-    {
-      id: 6,
-      name: 'Dacia Logan',
-      image: '/images/dacia-logan-black.jpg',
-      seats: 5,
-      doors: 4,
-      transmission: 'Manuelle',
-      features: ['Climatisation', 'USB', 'Bluetooth', 'Grand coffre'],
-      price: 350,
-    },
-    {
-      id: 7,
       name: 'Dacia Logan',
       image: '/images/dacia-logan.jpg',
       seats: 5,
       doors: 4,
-      transmission: 'Boite automatique',
+      transmission: 'Manuelle',
       features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'Grand coffre'],
-      price: 350,
+      price: 300,
+    },
+    {
+      id: 4,
+      name: 'Dacia Duster',
+      image: '/images/Daciaduster1.png',
+      seats: 5,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Diesel', 'Climatisation', 'USB', 'Bluetooth', '4x4'],
+      price: 400,
+    },
+    {
+      id: 5,
+      name: 'Dacia Jogger',
+      image: '/images/Daciajogger1.png',
+      seats: 7,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Diesel', 'Climatisation', 'USB', 'Bluetooth', '7 Places'],
+      price: 400,
+    },
+    {
+      id: 6,
+      name: 'Peugeot 208',
+      image: '/images/peugeot2081.png',
+      seats: 5,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
+      price: 300,
+    },
+    {
+      id: 7,
+      name: 'Peugeot 2008',
+      image: '/images/peugeot20081.png',
+      seats: 5,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'SUV'],
+      price: 500,
+    },
+    {
+      id: 8,
+      name: 'Renault Clio 5',
+      image: '/images/Clio51.png',
+      seats: 5,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
+      price: 300,
+    },
+    {
+      id: 9,
+      name: 'Renault Clio 5',
+      image: '/images/Clio51.png',
+      seats: 5,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Diesel', 'Climatisation', 'USB', 'Bluetooth'],
+      price: 250,
+    },
+    {
+      id: 10,
+      name: 'Seat Ibiza',
+      image: '/images/Seatibiza1.png',
+      seats: 5,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
+      price: 400,
+    },
+    {
+      id: 11,
+      name: 'Citroën C3 Aircross',
+      image: '/images/Citroenc3aircross.png',
+      seats: 5,
+      doors: 5,
+      transmission: 'Manuelle',
+      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'SUV'],
+      price: 450,
     },
   ];
 
@@ -129,12 +169,12 @@ const FleetPage = () => {
               Notre Flotte
             </span>
             <h1 className="mt-2 mb-4 font-display text-4xl font-bold text-ritcars-black md:text-5xl">
-              7 vehicules Dacia a votre service
+              11 véhicules à votre service
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-gray-600">
-              Tous nos vehicules sont recents, propres et parfaitement entretenus.
-              Prix fixe :{' '}
-              <span className="font-bold text-ritcars-orange">350 MAD/jour, sans surprises</span>
+              Tous nos véhicules sont récents, propres et parfaitement entretenus.
+              À partir de{' '}
+              <span className="font-bold text-ritcars-orange">250 MAD/jour</span>
             </p>
           </div>
         </div>
