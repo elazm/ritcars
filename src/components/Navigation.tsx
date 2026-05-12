@@ -153,6 +153,16 @@ export default function Navigation() {
         </div>
       </div>
 
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="fixed bottom-5 right-5 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_14px_34px_rgba(37,211,102,0.38)] transition-all hover:-translate-y-0.5 hover:bg-[#20bd5a] hover:shadow-[0_18px_42px_rgba(37,211,102,0.42)] focus:outline-none focus:ring-4 focus:ring-[#25D366]/30 md:bottom-7 md:right-7 md:h-16 md:w-16"
+      >
+        <FaWhatsapp className="size-7 text-white md:size-8" />
+      </a>
+
       <div className="h-[52px]" />
     </>
   );

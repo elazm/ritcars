@@ -1,17 +1,12 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import twilio from 'twilio';
 import rateLimit from 'express-rate-limit';
 import { z } from 'zod';
 
 dotenv.config();
 
 console.log('ENV CHECK:', {
-  sid: process.env.TWILIO_ACCOUNT_SID ? 'loaded' : 'missing',
-  token: process.env.TWILIO_AUTH_TOKEN ? 'loaded' : 'missing',
-  from: process.env.TWILIO_WHATSAPP_FROM ? 'loaded' : 'missing',
-  to: process.env.TWILIO_WHATSAPP_TO ? 'loaded' : 'missing',
   supabaseUrl: process.env.SUPABASE_URL ? 'loaded' : 'missing',
   supabaseKey: process.env.SUPABASE_SERVICE_ROLE_KEY ? 'loaded' : 'missing',
 });
@@ -167,43 +162,6 @@ async function insertReservation(payload) {
   }
 
   return Array.isArray(data) ? data[0] : data;
-}
-
-async function sendWhatsappNotification(payload) {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const from = process.env.TWILIO_WHATSAPP_FROM;
-  const to = process.env.TWILIO_WHATSAPP_TO;
-
-  if (!accountSid || !authToken || !from || !to) {
-    return { sent: false, reason: 'Twilio not configured' };
-  }
-
-  const client = twilio(accountSid, authToken);
-  const whatsappBody = [
-    'Nouvelle reservation',
-    '',
-    `Client: ${payload.full_name}`,
-    `Telephone: ${payload.phone}`,
-    `Email: ${payload.email || 'Non renseigne'}`,
-    `Voiture: ${payload.car}`,
-    `Lieu de retrait: ${payload.pickup_location}`,
-    `Date de retrait: ${payload.pickup_date}`,
-    `Date de retour: ${payload.return_date}`,
-    `Message: ${payload.message || 'Aucun'}`,
-  ].join('\n');
-
-  const message = await client.messages.create({
-    body: whatsappBody,
-    from,
-    to,
-  });
-
-  return { sent: true, sid: message.sid };
-}
-
-function jsonResponse(data, status = 200) {
-  return { status, body: data };
 }
 
 function requireAdminAuth(req) {
@@ -438,48 +396,19 @@ app.post('/api/reservations', reservationRateLimit, async (req, res) => {
     const supabaseConfigured =
       Boolean(process.env.SUPABASE_URL) &&
       Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
-    const twilioConfigured =
-      Boolean(process.env.TWILIO_ACCOUNT_SID) &&
-      Boolean(process.env.TWILIO_AUTH_TOKEN) &&
-      Boolean(process.env.TWILIO_WHATSAPP_FROM) &&
-      Boolean(process.env.TWILIO_WHATSAPP_TO);
 
-    let storedReservation = null;
-    let supabaseError = null;
-    let whatsappResult = { sent: false, reason: null };
-
-    if (supabaseConfigured) {
-      try {
-        storedReservation = await insertReservation(reservationPayload);
-      } catch (error) {
-        supabaseError = error instanceof Error ? error.message : 'Erreur Supabase inconnue';
-        console.error('Supabase insert failed:', supabaseError);
-      }
-    }
-
-    if (twilioConfigured) {
-      try {
-        whatsappResult = await sendWhatsappNotification(reservationPayload);
-      } catch (error) {
-        whatsappResult = {
-          sent: false,
-          reason: error instanceof Error ? error.message : 'Erreur WhatsApp inconnue',
-        };
-        console.error('Twilio notification failed:', whatsappResult.reason);
-      }
-    }
-
-    if (!storedReservation && !whatsappResult.sent) {
+    if (!supabaseConfigured) {
       return res.status(500).json({
         success: false,
         error: 'Impossible de traiter la reservation. Verifiez la configuration du serveur.',
       });
     }
 
+    const storedReservation = await insertReservation(reservationPayload);
+
     return res.status(200).json({
       success: true,
-      stored: Boolean(storedReservation),
-      whatsappSent: whatsappResult.sent,
+      stored: true,
       reservationId: storedReservation?.id || null,
     });
   } catch (error) {
