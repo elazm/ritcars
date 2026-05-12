@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const rateLimitStore = new Map();
-const OWNER_EMAIL = "eelazharii@gmail.com";
+const OWNER_EMAIL = "ritcarsrent@gmail.com";
 
 function readPositiveIntEnv(name, fallback) {
   const value = Number.parseInt(process.env[name] || "", 10);
