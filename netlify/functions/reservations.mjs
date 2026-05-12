@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const rateLimitStore = new Map();
@@ -110,10 +110,14 @@ async function insertReservation(payload) {
 }
 
 async function sendEmails(payload) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return { sent: false, reason: "Resend not configured" };
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPass = process.env.GMAIL_APP_PASSWORD;
+  if (!gmailUser || !gmailPass) return { sent: false, reason: "Gmail not configured" };
 
-  const resend = new Resend(apiKey);
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user: gmailUser, pass: gmailPass },
+  });
 
   const ownerHtml = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:24px;background:#f9f9f9;border-radius:8px;">
@@ -131,8 +135,8 @@ async function sendEmails(payload) {
     </div>`;
 
   const emails = [
-    resend.emails.send({
-      from: "Rit Cars <reservations@ritcars.com>",
+    transporter.sendMail({
+      from: `"Rit Cars" <${gmailUser}>`,
       to: OWNER_EMAIL,
       subject: `Nouvelle réservation - ${payload.full_name} - ${payload.car}`,
       html: ownerHtml,
@@ -156,8 +160,8 @@ async function sendEmails(payload) {
       </div>`;
 
     emails.push(
-      resend.emails.send({
-        from: "Rit Cars <reservations@ritcars.com>",
+      transporter.sendMail({
+        from: `"Rit Cars" <${gmailUser}>`,
         to: payload.email,
         subject: "Votre réservation Rit Cars est reçue",
         html: customerHtml,
