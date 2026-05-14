@@ -177,9 +177,9 @@ const HomePage = () => {
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div className="stat-item text-center">
               <p className="mb-2 font-display text-4xl font-bold text-ritcars-orange md:text-5xl">
-                7
+                11
               </p>
-              <p className="text-sm text-gray-400">Vehicules</p>
+              <p className="text-sm text-gray-400">Véhicules</p>
             </div>
 
             <div className="stat-item text-center">
