@@ -1,17 +1,98 @@
-import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import {
-  FaCheck as Check,
-  FaDoorOpen as DoorOpen,
-  FaGaugeHigh as Gauge,
+  FaCarSide as Car,
+  FaGasPump as Fuel,
   FaUsers as Users,
+  FaWhatsapp as WhatsApp,
+  FaGaugeHigh as Gauge,
 } from 'react-icons/fa6';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const WHATSAPP_BASE = 'https://wa.me/212762253818';
+
+const fleetCars = [
+  { id: 1,  name: 'Dacia Sandero',         image: '/images/dacia-sandero.jpg',      seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 280 },
+  { id: 2,  name: 'Dacia Sandero Stepway', image: '/images/dacia-stepway-grey.jpg', seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 320 },
+  { id: 3,  name: 'Dacia Logan',           image: '/images/dacia-logan.jpg',         seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 300 },
+  { id: 4,  name: 'Dacia Duster',          image: '/images/Daciaduster1.png',        seats: 5, fuel: 'Diesel',  transmission: 'Manuelle', price: 400 },
+  { id: 5,  name: 'Dacia Jogger',          image: '/images/Daciajogger1.png',        seats: 7, fuel: 'Diesel',  transmission: 'Manuelle', price: 400 },
+  { id: 6,  name: 'Peugeot 208',           image: '/images/peugeot2081.png',         seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 300 },
+  { id: 7,  name: 'Peugeot 2008',          image: '/images/peugeot20081.png',        seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 500 },
+  { id: 8,  name: 'Renault Clio 5',        image: '/images/Clio51.png',              seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 300 },
+  { id: 9,  name: 'Renault Clio 5 Diesel', image: '/images/Clio51.png',              seats: 5, fuel: 'Diesel',  transmission: 'Manuelle', price: 250 },
+  { id: 10, name: 'Seat Ibiza',            image: '/images/Seatibiza1.png',          seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 400 },
+  { id: 11, name: 'Citroën C3 Aircross',   image: '/images/Citroenc3aircross.png',   seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 450 },
+];
+
+function CarCard({ car }: { car: typeof fleetCars[0] }) {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
+  const waLink = `${WHATSAPP_BASE}?text=${encodeURIComponent(`Bonjour, je veux réserver la ${car.name}. Pouvez-vous me confirmer la disponibilité et le prix ?`)}`;
+
+  return (
+    <div className="fleet-car flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl">
+      {/* Image */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+        {!imgLoaded && !imgError && (
+          <div className="absolute inset-0 animate-pulse bg-gray-200" />
+        )}
+        {imgError ? (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gray-100 text-gray-400">
+            <Car className="size-12" />
+            <span className="text-sm font-medium">{car.name}</span>
+          </div>
+        ) : (
+          <img
+            src={car.image}
+            alt={`${car.name} - location voiture Tétouan`}
+            loading="lazy"
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgError(true)}
+            className={`h-full w-full object-cover transition-all duration-500 hover:scale-105 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+          />
+        )}
+        {/* Fuel badge */}
+        <span className={`absolute right-3 top-3 rounded-full px-2.5 py-1 text-xs font-bold text-white ${car.fuel === 'Diesel' ? 'bg-blue-600' : 'bg-green-600'}`}>
+          {car.fuel}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="mb-3 font-display text-lg font-bold text-ritcars-black">{car.name}</h3>
+
+        <div className="mb-4 flex flex-wrap gap-3 text-sm text-gray-500">
+          <span className="flex items-center gap-1.5"><Users className="size-4 text-ritcars-orange" />{car.seats} places</span>
+          <span className="flex items-center gap-1.5"><Fuel className="size-4 text-ritcars-orange" />{car.fuel}</span>
+          <span className="flex items-center gap-1.5"><Gauge className="size-4 text-ritcars-orange" />{car.transmission}</span>
+        </div>
+
+        <div className="mt-auto flex items-center justify-between border-t pt-4">
+          <div>
+            <p className="text-xs text-gray-400">À partir de</p>
+            <p className="font-display text-2xl font-bold text-ritcars-orange">
+              {car.price} <span className="text-sm font-normal text-gray-400">MAD/jour</span>
+            </p>
+          </div>
+          <a
+            href={waLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-[44px] items-center gap-2 rounded-xl bg-[#25D366] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#20ba59]"
+          >
+            <WhatsApp className="size-4" />
+            Réserver
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const FleetPage = () => {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -19,247 +100,61 @@ const FleetPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headerRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
-      );
-
-      gsap.fromTo(
-        '.fleet-car',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: carsRef.current,
-            start: 'top 80%',
-          },
-        }
-      );
+      gsap.fromTo(headerRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+      gsap.fromTo('.fleet-car', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: carsRef.current, start: 'top 80%' } });
     });
-
     return () => ctx.revert();
   }, []);
-
-  const fleetCars = [
-    {
-      id: 1,
-      name: 'Dacia Sandero',
-      image: '/images/dacia-sandero.jpg',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
-      price: 280,
-    },
-    {
-      id: 2,
-      name: 'Dacia Sandero Stepway',
-      image: '/images/dacia-stepway-grey.jpg',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'Barres de toit'],
-      price: 320,
-    },
-    {
-      id: 3,
-      name: 'Dacia Logan',
-      image: '/images/dacia-logan.jpg',
-      seats: 5,
-      doors: 4,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'Grand coffre'],
-      price: 300,
-    },
-    {
-      id: 4,
-      name: 'Dacia Duster',
-      image: '/images/Daciaduster1.png',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Diesel', 'Climatisation', 'USB', 'Bluetooth', '4x4'],
-      price: 400,
-    },
-    {
-      id: 5,
-      name: 'Dacia Jogger',
-      image: '/images/Daciajogger1.png',
-      seats: 7,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Diesel', 'Climatisation', 'USB', 'Bluetooth', '7 Places'],
-      price: 400,
-    },
-    {
-      id: 6,
-      name: 'Peugeot 208',
-      image: '/images/peugeot2081.png',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
-      price: 300,
-    },
-    {
-      id: 7,
-      name: 'Peugeot 2008',
-      image: '/images/peugeot20081.png',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'SUV'],
-      price: 500,
-    },
-    {
-      id: 8,
-      name: 'Renault Clio 5',
-      image: '/images/Clio51.png',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
-      price: 300,
-    },
-    {
-      id: 9,
-      name: 'Renault Clio 5',
-      image: '/images/Clio51.png',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Diesel', 'Climatisation', 'USB', 'Bluetooth'],
-      price: 250,
-    },
-    {
-      id: 10,
-      name: 'Seat Ibiza',
-      image: '/images/Seatibiza1.png',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth'],
-      price: 400,
-    },
-    {
-      id: 11,
-      name: 'Citroën C3 Aircross',
-      image: '/images/Citroenc3aircross.png',
-      seats: 5,
-      doors: 5,
-      transmission: 'Manuelle',
-      features: ['Essence', 'Climatisation', 'USB', 'Bluetooth', 'SUV'],
-      price: 450,
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-white">
       <Navigation />
 
-      <section className="bg-gray-50 pt-28 pb-12">
-        <div ref={headerRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Header */}
+      <section className="bg-gray-50 pb-12 pt-28">
+        <div ref={headerRef} className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">
-              Notre Flotte
-            </span>
-            <h1 className="mt-2 mb-4 font-display text-4xl font-bold text-ritcars-black md:text-5xl">
+            <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">Notre Flotte</span>
+            <h1 className="mb-4 mt-2 font-display text-4xl font-bold text-ritcars-black md:text-5xl">
               11 véhicules à votre service
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-gray-600">
-              Tous nos véhicules sont récents, propres et parfaitement entretenus.
-              À partir de{' '}
-              <span className="font-bold text-ritcars-orange">250 MAD/jour</span>
+              Tous nos véhicules sont récents, propres et parfaitement entretenus.{' '}
+              <span className="font-bold text-ritcars-orange">À partir de 250 MAD/jour</span>
             </p>
+            {/* Trust badges */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600">
+              {['✅ Assurance incluse', '✅ Kilométrage illimité', '✅ Sans dépôt', '✅ Support 24/7'].map(b => (
+                <span key={b} className="rounded-full bg-white px-4 py-2 shadow-sm font-medium">{b}</span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Cars grid */}
       <section ref={carsRef} className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {fleetCars.map((car) => (
-              <div
-                key={car.id}
-                className="fleet-car overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl"
-              >
-                <div className="aspect-[16/10] overflow-hidden bg-gray-100">
-                  <img
-                    src={car.image}
-                    alt={car.name}
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-
-                <div className="p-6">
-                  <h3 className="mb-3 font-display text-xl font-bold text-ritcars-black">
-                    {car.name}
-                  </h3>
-
-                  <div className="mb-4 flex flex-wrap gap-3 text-sm text-gray-600">
-                    <span className="flex items-center gap-1">
-                      <Users className="h-4 w-4" /> {car.seats} places
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <DoorOpen className="h-4 w-4" /> {car.doors} portes
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Gauge className="h-4 w-4" /> {car.transmission}
-                    </span>
-                  </div>
-
-                  <div className="mb-5 flex flex-wrap gap-2">
-                    {car.features.map((feature) => (
-                      <span
-                        key={feature}
-                        className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600"
-                      >
-                        <Check className="h-3 w-3 text-ritcars-orange" />
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between border-t pt-4">
-                    <div>
-                      <span className="text-sm text-gray-500">Prix/jour</span>
-                      <p className="font-display text-2xl font-bold text-ritcars-orange">
-                        {car.price} <span className="text-sm text-gray-500">MAD</span>
-                      </p>
-                    </div>
-                    <Link
-                      to="/reservation"
-                      className="rounded-lg bg-ritcars-black px-6 py-2.5 font-medium text-white transition-colors hover:bg-ritcars-orange"
-                    >
-                      Reserver
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {fleetCars.map(car => <CarCard key={car.id} car={car} />)}
           </div>
         </div>
       </section>
 
+      {/* CTA */}
       <section className="bg-ritcars-black py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="mb-4 font-display text-3xl font-bold text-white">
-            Vous avez trouve votre voiture ?
-          </h2>
-          <p className="mb-8 text-gray-400">
-            Reservez maintenant et profitez de votre sejour a Tetouan.
-          </p>
-          <Link
-            to="/reservation"
-            className="inline-block rounded-xl bg-ritcars-orange px-10 py-4 font-semibold text-white transition-colors hover:bg-ritcars-orange/90"
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="mb-4 font-display text-3xl font-bold text-white">Vous avez trouvé votre voiture ?</h2>
+          <p className="mb-8 text-gray-400">Réservez maintenant et profitez de votre séjour à Tétouan.</p>
+          <a
+            href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Bonjour, je veux réserver une voiture. Pouvez-vous m\'aider ?')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-ritcars-orange px-10 py-4 font-semibold text-white transition-colors hover:bg-[#C2410C]"
           >
-            Reserver maintenant
-          </Link>
+            <WhatsApp className="size-5" />
+            Réserver sur WhatsApp
+          </a>
         </div>
       </section>
 
