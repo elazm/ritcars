@@ -146,7 +146,7 @@ const HeroSection = ({ className = '' }: HeroSectionProps) => {
         style={{ opacity: 0 }}
       >
         <img
-          src="/images/hero-city.jpg"
+          src="/images/hero-city.png"
           alt="Night city with car"
           className="w-full h-full object-cover"
         />

@@ -201,7 +201,7 @@ const HomePage = () => {
       {/* HERO */}
       <section className="relative overflow-hidden bg-ritcars-black pt-20 pb-32 md:pt-28 md:pb-40">
         <img
-          src="/images/hero-city.jpg"
+          src="/images/hero-city.png"
           alt="Location voiture Tétouan"
           className="absolute inset-0 h-full w-full object-cover opacity-30"
         />
