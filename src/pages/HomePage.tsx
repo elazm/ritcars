@@ -55,15 +55,22 @@ function CarCard({ car }: { car: typeof allCars[0] }) {
   const badge = carBadge(car);
 
   return (
-    <div className="car-card group flex flex-col overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-
-      {/* Image — taller, more dominant */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
+    <div
+      className="car-card group flex flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:-translate-y-1"
+      style={{
+        border: '1px solid rgba(0,0,0,0.07)',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
+      }}
+      onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06)')}
+      onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)')}
+    >
+      {/* Image */}
+      <div className="relative aspect-[4/3] overflow-hidden" style={{ background: '#f0eeeb' }}>
         {!imgLoaded && !imgError && (
-          <div className="absolute inset-0 animate-pulse bg-gray-100" />
+          <div className="absolute inset-0 animate-pulse" style={{ background: '#e8e5e0' }} />
         )}
         {imgError ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gray-50 text-gray-300">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-gray-300" style={{ background: '#f0eeeb' }}>
             <Car className="size-14" />
             <span className="text-sm font-medium text-gray-400">{car.name}</span>
           </div>
@@ -74,52 +81,58 @@ function CarCard({ car }: { car: typeof allCars[0] }) {
             loading="lazy"
             onLoad={() => setImgLoaded(true)}
             onError={() => setImgError(true)}
-            className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02] ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
         )}
 
+        {/* Subtle ground shadow under the image */}
+        <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/10 to-transparent" />
+
         {/* Badge top-left */}
-        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-gray-700 shadow-sm backdrop-blur-sm">
+        <span className="absolute left-3 top-3 rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wide text-gray-600" style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.10)' }}>
           {badge}
         </span>
 
         {/* Fuel top-right */}
-        <span className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm ${car.fuel === 'Diesel' ? 'bg-blue-600' : 'bg-emerald-500'}`}>
+        <span className={`absolute right-3 top-3 rounded-md px-2.5 py-1 text-[11px] font-semibold text-white ${car.fuel === 'Diesel' ? 'bg-blue-700' : 'bg-emerald-600'}`}>
           {car.fuel}
         </span>
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col px-6 pb-6 pt-5">
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
 
-        {/* Price — dominant, first */}
-        <div className="mb-3">
-          <span className="font-display text-3xl font-bold text-ritcars-orange">{car.price}</span>
-          <span className="ml-1.5 text-sm font-medium text-gray-400">MAD / jour</span>
+        {/* Price */}
+        <div className="mb-2 flex items-baseline gap-1.5">
+          <span className="font-display text-3xl font-bold" style={{ color: '#c2410c' }}>{car.price}</span>
+          <span className="text-sm font-medium text-gray-400">MAD / jour</span>
         </div>
 
         {/* Car name */}
-        <h3 className="mb-4 text-xl font-bold leading-snug text-gray-900">{car.name}</h3>
+        <h3 className="mb-4 text-[1.1rem] font-bold leading-snug" style={{ color: '#111' }}>{car.name}</h3>
 
-        {/* Specs — minimal, pill style */}
-        <div className="mb-6 flex flex-wrap gap-2">
-          <span className="rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-600">
-            {car.seats} places
-          </span>
-          <span className="rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-600">
-            {car.transmission}
-          </span>
-          <span className="rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-600">
-            {car.fuel}
-          </span>
+        {/* Specs */}
+        <div className="mb-5 flex flex-wrap gap-2">
+          {[`${car.seats} places`, car.transmission, car.fuel].map(spec => (
+            <span
+              key={spec}
+              className="rounded-md px-3 py-1.5 text-xs font-medium text-gray-500"
+              style={{ background: '#f5f4f2', border: '1px solid rgba(0,0,0,0.06)' }}
+            >
+              {spec}
+            </span>
+          ))}
         </div>
 
-        {/* CTA — full width, prominent */}
+        {/* CTA */}
         <a
           href={waLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-auto flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-ritcars-orange font-bold text-white transition-colors hover:bg-[#C2410C]"
+          className="mt-auto flex min-h-[50px] w-full items-center justify-center gap-2 rounded-xl font-semibold text-white transition-colors"
+          style={{ background: '#c2410c' }}
+          onMouseEnter={e => (e.currentTarget.style.background = '#9a3412')}
+          onMouseLeave={e => (e.currentTarget.style.background = '#c2410c')}
         >
           <WhatsApp className="size-5" />
           Réserver ce véhicule
