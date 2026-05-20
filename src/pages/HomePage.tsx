@@ -11,8 +11,6 @@ import {
   FaShieldHalved as Shield,
   FaStar as Star,
   FaWhatsapp as WhatsApp,
-  FaGasPump as Fuel,
-  FaUsers as Users,
   FaInfinity as InfiniteIcon,
   FaHeadset as Headset,
   FaCircleCheck as CircleCheck,
@@ -42,63 +40,90 @@ const reviews = [
   { name: 'Youssef A.', rating: 5, text: 'Excellent rapport qualité-prix. Assurance incluse, kilométrage illimité — pas de mauvaises surprises.' },
 ];
 
+function carBadge(car: typeof allCars[0]): string {
+  if (car.seats === 7) return 'Familial';
+  if (car.price >= 450) return 'Premium';
+  if (car.price <= 280) return 'Économique';
+  if (car.name.toLowerCase().includes('duster') || car.name.toLowerCase().includes('2008') || car.name.toLowerCase().includes('aircross')) return 'SUV';
+  return 'Populaire';
+}
+
 function CarCard({ car }: { car: typeof allCars[0] }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
-  const waLink = `${WHATSAPP_BASE}?text=${encodeURIComponent(`Bonjour, je veux réserver la ${car.name}`)}`;
+  const waLink = `${WHATSAPP_BASE}?text=${encodeURIComponent(`Bonjour, je voudrais réserver la ${car.name}. Pouvez-vous me confirmer la disponibilité ?`)}`;
+  const badge = carBadge(car);
 
   return (
-    <div className="car-card flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl">
-      <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+    <div className="car-card group flex flex-col overflow-hidden rounded-3xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+      {/* Image — taller, more dominant */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
         {!imgLoaded && !imgError && (
-          <div className="absolute inset-0 animate-pulse bg-gray-200" />
+          <div className="absolute inset-0 animate-pulse bg-gray-100" />
         )}
         {imgError ? (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 text-gray-400">
-            <Car className="mb-2 size-10" />
-            <span className="text-sm font-medium">{car.name}</span>
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gray-50 text-gray-300">
+            <Car className="size-14" />
+            <span className="text-sm font-medium text-gray-400">{car.name}</span>
           </div>
         ) : (
           <img
             src={car.image}
-            alt={`${car.name} - location voiture Tétouan`}
+            alt={`${car.name} — location voiture Tétouan`}
             loading="lazy"
             onLoad={() => setImgLoaded(true)}
             onError={() => setImgError(true)}
-            className={`h-full w-full object-cover transition-all duration-500 hover:scale-105 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
         )}
-        <span className={`absolute top-3 right-3 rounded-full px-2.5 py-1 text-xs font-semibold text-white ${car.fuel === 'Diesel' ? 'bg-blue-600' : 'bg-green-600'}`}>
+
+        {/* Badge top-left */}
+        <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-gray-700 shadow-sm backdrop-blur-sm">
+          {badge}
+        </span>
+
+        {/* Fuel top-right */}
+        <span className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm ${car.fuel === 'Diesel' ? 'bg-blue-600' : 'bg-emerald-500'}`}>
           {car.fuel}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="mb-3 font-display text-lg font-bold text-ritcars-black">{car.name}</h3>
+      {/* Content */}
+      <div className="flex flex-1 flex-col px-6 pb-6 pt-5">
 
-        <div className="mb-4 flex flex-wrap gap-3 text-sm text-gray-500">
-          <span className="flex items-center gap-1"><Users className="size-4" /> {car.seats} places</span>
-          <span className="flex items-center gap-1"><Fuel className="size-4" /> {car.fuel}</span>
-          <span className="flex items-center gap-1"><Car className="size-4" /> {car.transmission}</span>
+        {/* Price — dominant, first */}
+        <div className="mb-3">
+          <span className="font-display text-3xl font-bold text-ritcars-orange">{car.price}</span>
+          <span className="ml-1.5 text-sm font-medium text-gray-400">MAD / jour</span>
         </div>
 
-        <div className="mt-auto flex items-center justify-between border-t pt-4">
-          <div>
-            <p className="text-xs text-gray-400">À partir de</p>
-            <p className="font-display text-2xl font-bold text-ritcars-orange">
-              {car.price} <span className="text-sm font-normal text-gray-400">MAD/jour</span>
-            </p>
-          </div>
-          <a
-            href={waLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex min-h-[44px] items-center gap-2 rounded-xl bg-[#25D366] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#20ba59]"
-          >
-            <WhatsApp className="size-4" />
-            Réserver
-          </a>
+        {/* Car name */}
+        <h3 className="mb-4 text-xl font-bold leading-snug text-gray-900">{car.name}</h3>
+
+        {/* Specs — minimal, pill style */}
+        <div className="mb-6 flex flex-wrap gap-2">
+          <span className="rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-600">
+            {car.seats} places
+          </span>
+          <span className="rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-600">
+            {car.transmission}
+          </span>
+          <span className="rounded-lg bg-gray-50 px-3 py-1.5 text-xs font-semibold text-gray-600">
+            {car.fuel}
+          </span>
         </div>
+
+        {/* CTA — full width, prominent */}
+        <a
+          href={waLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-ritcars-orange font-bold text-white transition-colors hover:bg-[#C2410C]"
+        >
+          <WhatsApp className="size-5" />
+          Réserver ce véhicule
+        </a>
       </div>
     </div>
   );
