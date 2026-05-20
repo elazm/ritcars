@@ -39,9 +39,27 @@ const allCars = [
 ];
 
 const reviews = [
-  { name: 'Karim B.',    rating: 5, text: 'Super service, voiture propre et en parfait état. Je recommande vivement Ritcars pour votre séjour à Tétouan !' },
-  { name: 'Sophie M.',   rating: 5, text: 'Prix très corrects, équipe sympa et réactive sur WhatsApp. La voiture était disponible à l\'heure.' },
-  { name: 'Youssef A.',  rating: 5, text: 'Excellent rapport qualité-prix. Assurance incluse, kilométrage illimité — pas de mauvaises surprises.' },
+  {
+    name: 'Karim B.',
+    origin: 'Casablanca',
+    trip: 'Séjour familial à Tétouan',
+    rating: 5,
+    text: 'On a loué une Dacia Sandero pour une semaine. Voiture propre, plein fait, et livrée directement à notre riad. Le monsieur a répondu sur WhatsApp en quelques minutes. Aucun souci du début à la fin.',
+  },
+  {
+    name: 'Sophie M.',
+    origin: 'Lyon, France',
+    trip: 'Road trip nord du Maroc',
+    rating: 5,
+    text: 'Nous avons fait Tétouan, Chefchaouen et Asilah avec la Clio. Voiture en très bon état, kilométrage illimité comme promis, et le prix était exactement celui annoncé. Pas de surprise à la restitution.',
+  },
+  {
+    name: 'Youssef A.',
+    origin: 'Tétouan',
+    trip: 'Location longue durée',
+    rating: 5,
+    text: 'J\'habite Tétouan et je fais appel à Ritcars régulièrement quand ma voiture est en révision. Prix honnête, assurance incluse, et on sent que c\'est une vraie agence locale — pas un intermédiaire.',
+  },
 ];
 
 function carBadge(car: typeof allCars[0]): string {
@@ -265,10 +283,10 @@ const HomePage = () => {
         <div className="mx-auto max-w-5xl px-5 sm:px-6">
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
             {[
-              { icon: Shield,       label: 'Assurance incluse' },
+              { icon: Shield,       label: 'Assurance tous risques incluse' },
               { icon: InfiniteIcon, label: 'Kilométrage illimité' },
-              { icon: CircleCheck,  label: 'Sans dépôt' },
-              { icon: Headset,      label: 'Support 24/7' },
+              { icon: CircleCheck,  label: 'Sans frais cachés' },
+              { icon: Headset,      label: 'Réponse WhatsApp rapide' },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-2 text-gray-600">
                 <Icon className="size-4 shrink-0" style={{ color: ACCENT }} />
@@ -309,10 +327,10 @@ const HomePage = () => {
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-4">
             {[
-              { icon: Shield,       title: 'Assurance incluse',      desc: 'Tous nos véhicules sont assurés pour votre tranquillité.' },
-              { icon: InfiniteIcon, title: 'Kilométrage illimité',   desc: 'Roulez sans souci, sans compteur kilométrique.' },
-              { icon: CircleCheck,  title: 'Sans dépôt de garantie', desc: 'Pas de caution bloquée, réservation simple et rapide.' },
-              { icon: Headset,      title: 'Support 24/7',           desc: 'Service client disponible à tout moment sur WhatsApp.' },
+              { icon: Shield,       title: 'Assurance tous risques', desc: 'Chaque véhicule est assuré tous risques. Vous roulez couvert, sans vous en préoccuper.' },
+              { icon: InfiniteIcon, title: 'Kilométrage illimité',   desc: 'Tétouan, Chefchaouen, Tanger, Martil — roulez où vous voulez, sans compter les km.' },
+              { icon: CircleCheck,  title: 'Prix clairs, sans frais cachés', desc: 'Le prix annoncé est le prix payé. Pas de frais de restitution, pas de surprises.' },
+              { icon: Headset,      title: 'Contact direct sur WhatsApp', desc: 'Vous parlez directement à l\'équipe Ritcars — pas à un call center, pas à un bot.' },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="feature-card rounded-2xl bg-white p-7"
                 style={{ border: '1px solid rgba(0,0,0,0.06)', boxShadow: '0 1px 4px rgba(0,0,0,0.05)' }}>
@@ -365,12 +383,12 @@ const HomePage = () => {
           <div className="mb-12 text-center">
             <Label>Avis clients</Label>
             <h2 className="mt-3 text-[1.85rem] font-bold leading-tight tracking-tight text-gray-900">
-              Ce que disent nos clients
+              Ils nous ont fait confiance
             </h2>
             <div className="mt-4 flex items-center justify-center gap-1.5">
               {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />)}
-              <span className="ml-1 text-sm font-semibold text-gray-800">4.9/5</span>
-              <span className="text-sm text-gray-400">· 200+ avis</span>
+              <span className="ml-1 text-sm font-semibold text-gray-800">4.9 / 5</span>
+              <span className="text-sm text-gray-400">· plus de 200 locations</span>
             </div>
           </div>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -381,7 +399,10 @@ const HomePage = () => {
                   {[...Array(r.rating)].map((_, i) => <Star key={i} className="size-3.5 fill-yellow-400 text-yellow-400" />)}
                 </div>
                 <p className="mb-5 text-[0.9rem] leading-relaxed text-gray-600">"{r.text}"</p>
-                <p className="text-sm font-semibold text-gray-800">{r.name}</p>
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">{r.name}</p>
+                  <p className="mt-0.5 text-[11px] text-gray-400">{r.origin} · {r.trip}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -398,7 +419,7 @@ const HomePage = () => {
                 Trouvez Ritcars à Tétouan
               </h2>
               <p className="mt-4 text-[0.95rem] leading-relaxed text-gray-500">
-                Venez récupérer votre voiture directement à notre agence, ou ouvrez l'itinéraire dans Google Maps.
+                Notre agence est basée à Tétouan. Vous pouvez récupérer le véhicule sur place, ou opter pour la livraison à Martil, M'diq, Cabo Negro ou à votre hébergement.
               </p>
               <div className="mt-7 flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl" style={{ background: 'rgba(191,72,19,0.08)' }}>
@@ -436,7 +457,7 @@ const HomePage = () => {
             Prêt à prendre la route ?
           </h2>
           <p className="mb-8 text-[0.95rem] leading-relaxed text-gray-400">
-            Réservez votre voiture maintenant et découvrez Tétouan et ses environs.
+            Écrivez-nous sur WhatsApp — on vous répond rapidement avec les disponibilités et le meilleur tarif pour votre séjour.
           </p>
           <a
             href={`${WHATSAPP_BASE}?text=${encodeURIComponent('Bonjour, je veux réserver une voiture. Pouvez-vous m\'aider ?')}`}
