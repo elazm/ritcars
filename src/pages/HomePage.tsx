@@ -13,7 +13,7 @@ import {
   FaWhatsapp as WhatsApp,
   FaGasPump as Fuel,
   FaUsers as Users,
-  FaInfinity as Infinity,
+  FaInfinity as InfiniteIcon,
   FaHeadset as Headset,
   FaCircleCheck as CircleCheck,
 } from 'react-icons/fa6';
@@ -119,37 +119,37 @@ function BookingForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mx-auto w-full max-w-4xl rounded-2xl bg-white p-4 shadow-2xl sm:p-6"
+      className="mx-auto w-full max-w-3xl rounded-2xl bg-white p-6 shadow-2xl"
     >
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-semibold uppercase tracking-wide text-gray-500">Date de début</label>
+      <div className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-gray-700">Date de début</label>
           <input
             type="date"
             min={today}
             value={startDate}
             onChange={e => setStartDate(e.target.value)}
             required
-            className="min-h-[44px] rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-800 focus:border-ritcars-orange focus:outline-none focus:ring-2 focus:ring-ritcars-orange/20"
+            className="min-h-[48px] rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-800 focus:border-ritcars-orange focus:outline-none focus:ring-2 focus:ring-ritcars-orange/20"
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-semibold uppercase tracking-wide text-gray-500">Date de fin</label>
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-gray-700">Date de fin</label>
           <input
             type="date"
             min={startDate || today}
             value={endDate}
             onChange={e => setEndDate(e.target.value)}
             required
-            className="min-h-[44px] rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-800 focus:border-ritcars-orange focus:outline-none focus:ring-2 focus:ring-ritcars-orange/20"
+            className="min-h-[48px] rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-800 focus:border-ritcars-orange focus:outline-none focus:ring-2 focus:ring-ritcars-orange/20"
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-semibold uppercase tracking-wide text-gray-500">Type de voiture</label>
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-gray-700">Véhicule</label>
           <select
             value={carType}
             onChange={e => setCarType(e.target.value)}
-            className="min-h-[44px] rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-800 focus:border-ritcars-orange focus:outline-none focus:ring-2 focus:ring-ritcars-orange/20"
+            className="min-h-[48px] rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-800 focus:border-ritcars-orange focus:outline-none focus:ring-2 focus:ring-ritcars-orange/20"
           >
             <option value="">Tous les véhicules</option>
             <option>Dacia Sandero</option>
@@ -164,14 +164,14 @@ function BookingForm() {
             <option>Citroën C3 Aircross</option>
           </select>
         </div>
-        <button
-          type="submit"
-          className="flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-ritcars-orange px-6 py-2 font-semibold text-white transition-colors hover:bg-[#C2410C]"
-        >
-          <WhatsApp className="size-5" />
-          Réserver sur WhatsApp
-        </button>
       </div>
+      <button
+        type="submit"
+        className="flex w-full min-h-[52px] items-center justify-center gap-2 rounded-xl bg-ritcars-orange px-6 py-3 text-base font-bold text-white transition-colors hover:bg-[#C2410C]"
+      >
+        <WhatsApp className="size-5" />
+        Vérifier la disponibilité sur WhatsApp
+      </button>
     </form>
   );
 }
@@ -199,32 +199,45 @@ const HomePage = () => {
       <Navigation />
 
       {/* HERO */}
-      <section className="relative overflow-hidden bg-ritcars-black pt-20 pb-32 md:pt-28 md:pb-40">
+      <section className="relative overflow-hidden bg-ritcars-black pt-20 pb-16 md:pt-28 md:pb-24">
+        {/* Background image with strong controlled overlay */}
         <img
           src="/images/hero-city.png"
           alt="Location voiture Tétouan"
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 0.18 }}
         />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="hero-content text-center">
-            <span className="mb-4 inline-block rounded-full bg-ritcars-orange/20 px-4 py-2 text-sm font-medium text-ritcars-orange">
-              Location de voitures à Tétouan
-            </span>
-            <h1 className="mb-4 font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-              Louez une voiture et{' '}
-              <span className="text-ritcars-orange">explorez</span> le Royaume
-            </h1>
-            <p className="mx-auto mb-4 max-w-2xl text-lg text-white/75">
-              Véhicules récents, assurance incluse, kilométrage illimité. À partir de <strong className="text-white">250 MAD/jour</strong>.
-            </p>
-            <div className="mb-4 flex items-center justify-center gap-1">
+        {/* Gradient overlay for depth and text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="hero-content mb-10 text-center">
+
+            {/* Rating pill */}
+            <div className="mb-6 flex items-center justify-center gap-1.5">
               {[...Array(5)].map((_, i) => <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />)}
-              <span className="ml-2 text-sm text-white/80">4.9/5 · 200+ avis clients</span>
+              <span className="ml-1 text-sm font-medium text-white/75">4.9/5 · 200+ avis clients</span>
             </div>
+
+            {/* Headline */}
+            <h1 className="mb-5 font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Votre voiture vous attend<br className="hidden sm:block" />{' '}
+              <span className="text-ritcars-orange">à Tétouan</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="mx-auto mb-8 max-w-xl text-base text-white/70 sm:text-lg">
+              Location simple, rapide et fiable — livraison disponible à Tétouan, Martil, M'diq et environs.
+            </p>
+
+            {/* Trust line */}
+            <p className="mb-8 text-xs font-medium uppercase tracking-widest text-white/50">
+              Assurance incluse · Kilométrage illimité · Réservation rapide sur WhatsApp
+            </p>
           </div>
 
-          {/* Booking form overlapping */}
-          <div className="hero-content mt-8">
+          {/* Booking form */}
+          <div className="hero-content">
             <BookingForm />
           </div>
         </div>
@@ -236,7 +249,7 @@ const HomePage = () => {
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
             {[
               { icon: Shield, label: 'Assurance incluse' },
-              { icon: Infinity, label: 'Kilométrage illimité' },
+              { icon: InfiniteIcon, label: 'Kilométrage illimité' },
               { icon: CircleCheck, label: 'Sans dépôt' },
               { icon: Headset, label: 'Support 24/7' },
             ].map(({ icon: Icon, label }) => (
@@ -278,7 +291,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
             {[
               { icon: Shield,      title: 'Assurance incluse',      desc: 'Tous nos véhicules sont assurés pour votre tranquillité.' },
-              { icon: Infinity,    title: 'Kilométrage illimité',   desc: 'Roulez sans souci, sans compteur kilométrique.' },
+              { icon: InfiniteIcon, title: 'Kilométrage illimité',   desc: 'Roulez sans souci, sans compteur kilométrique.' },
               { icon: CircleCheck, title: 'Sans dépôt de garantie', desc: 'Pas de caution bloquée, réservation simple et rapide.' },
               { icon: Headset,     title: 'Support 24/7',           desc: 'Service client disponible à tout moment sur WhatsApp.' },
             ].map(({ icon: Icon, title, desc }) => (
