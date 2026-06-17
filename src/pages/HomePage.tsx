@@ -102,7 +102,7 @@ function CarCard({ car }: { car: typeof allCars[0] }) {
       onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.04)')}
     >
       {/* Image */}
-      <div className="relative aspect-[4/3] overflow-hidden" style={{ background: '#f0eeeb' }}>
+      <div className="relative aspect-[16/9] overflow-hidden" style={{ background: '#f0eeeb' }}>
         {!imgLoaded && !imgError && (
           <div className="absolute inset-0 animate-pulse" style={{ background: '#e8e5e0' }} />
         )}
@@ -118,7 +118,7 @@ function CarCard({ car }: { car: typeof allCars[0] }) {
             loading="lazy"
             onLoad={() => setImgLoaded(true)}
             onError={() => setImgError(true)}
-            className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02] ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`h-full w-full object-contain transition-opacity duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
         )}
         {/* Ground shadow */}

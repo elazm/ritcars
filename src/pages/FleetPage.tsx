@@ -42,7 +42,7 @@ function CarCard({ car }: { car: typeof fleetCars[0] }) {
   return (
     <div className="fleet-car flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl">
       {/* Image */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+      <div className="relative aspect-[16/9] overflow-hidden bg-gray-100">
         {!imgLoaded && !imgError && (
           <div className="absolute inset-0 animate-pulse bg-gray-200" />
         )}
@@ -58,7 +58,7 @@ function CarCard({ car }: { car: typeof fleetCars[0] }) {
             loading="lazy"
             onLoad={() => setImgLoaded(true)}
             onError={() => setImgError(true)}
-            className={`h-full w-full object-cover transition-all duration-500 hover:scale-105 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`h-full w-full object-contain transition-all duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
         )}
         {/* Fuel badge */}
