@@ -58,7 +58,7 @@ function CarCard({ car }: { car: typeof fleetCars[0] }) {
             loading="lazy"
             onLoad={() => setImgLoaded(true)}
             onError={() => setImgError(true)}
-            className={`h-full w-full object-contain transition-all duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+            className={`h-full w-full object-cover transition-all duration-500 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           />
         )}
         {/* Fuel badge */}
