@@ -27,6 +27,11 @@ const fleetCars = [
   { id: 9,  name: 'Renault Clio 5 Diesel', image: '/images/Clio51.png',              seats: 5, fuel: 'Diesel',  transmission: 'Manuelle', price: 250 },
   { id: 10, name: 'Seat Ibiza',            image: '/images/Seatibiza1.png',          seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 400 },
   { id: 11, name: 'Citroën C3 Aircross',   image: '/images/Citroenc3aircross.png',   seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 450 },
+  { id: 12, name: 'Hyundai i20',                image: '/images/i20.png',     seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 350 },
+  { id: 13, name: 'Hyundai i20',                image: '/images/i20.png',     seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 350 },
+  { id: 14, name: 'Hyundai Accent',             image: '/images/Accent.png',  seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 400 },
+  { id: 15, name: 'Hyundai Tucson',             image: '/images/Tucson.png',  seats: 5, fuel: 'Diesel',  transmission: 'Automatique', price: 500 },
+  { id: 16, name: 'Hyundai Tucson Full Option', image: '/images/Tucson.png',  seats: 5, fuel: 'Diesel',  transmission: 'Automatique', price: 700 },
 ];
 
 function CarCard({ car }: { car: typeof fleetCars[0] }) {
@@ -116,7 +121,7 @@ const FleetPage = () => {
           <div className="text-center">
             <span className="text-sm font-medium uppercase tracking-wider text-ritcars-orange">Notre Flotte</span>
             <h1 className="mb-4 mt-2 font-display text-4xl font-bold text-ritcars-black md:text-5xl">
-              11 véhicules à votre service
+              16 véhicules à votre service
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-gray-600">
               Tous nos véhicules sont récents, propres et parfaitement entretenus.{' '}

@@ -36,6 +36,11 @@ const allCars = [
   { id: 9,  name: 'Renault Clio 5',        image: '/images/Clio51.png',             seats: 5, fuel: 'Diesel',  transmission: 'Manuelle', price: 250 },
   { id: 10, name: 'Seat Ibiza',            image: '/images/Seatibiza1.png',         seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 400 },
   { id: 11, name: 'Citroën C3 Aircross',   image: '/images/Citroenc3aircross.png',  seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 450 },
+  { id: 12, name: 'Hyundai i20',                image: '/images/i20.png',    seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 350 },
+  { id: 13, name: 'Hyundai i20',                image: '/images/i20.png',    seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 350 },
+  { id: 14, name: 'Hyundai Accent',             image: '/images/Accent.png', seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 400 },
+  { id: 15, name: 'Hyundai Tucson',             image: '/images/Tucson.png', seats: 5, fuel: 'Diesel',  transmission: 'Automatique', price: 500 },
+  { id: 16, name: 'Hyundai Tucson Full Option', image: '/images/Tucson.png', seats: 5, fuel: 'Diesel',  transmission: 'Automatique', price: 700 },
 ];
 
 const reviews = [
@@ -352,7 +357,7 @@ const HomePage = () => {
             <div>
               <Label>Notre flotte</Label>
               <h2 className="mt-3 text-[1.85rem] font-bold leading-tight tracking-tight text-gray-900 md:text-[2.2rem]">
-                11 véhicules disponibles
+                16 véhicules disponibles
               </h2>
             </div>
             <Link to="/flotte" className="flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-gray-800 transition-colors">
