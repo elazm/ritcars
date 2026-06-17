@@ -25,7 +25,7 @@ const ACCENT       = '#bf4813';
 const ACCENT_HOVER = '#963a0f';
 
 const allCars = [
-  { id: 1,  name: 'Dacia Sandero',         image: '/images/dacia-sandero.jpg',      seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 280 },
+  { id: 1,  name: 'Dacia Sandero',         image: '/images/dacia-sandero.jpg',      seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 250 },
   { id: 2,  name: 'Dacia Sandero Stepway', image: '/images/dacia-stepway-grey.jpg', seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 320 },
   { id: 3,  name: 'Dacia Logan',           image: '/images/dacia-logan.jpg',        seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 300 },
   { id: 4,  name: 'Dacia Duster',          image: '/images/Daciaduster1.png',       seats: 5, fuel: 'Diesel',  transmission: 'Manuelle', price: 400 },
