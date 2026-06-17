@@ -31,7 +31,7 @@ const allCars = [
   { id: 4,  name: 'Dacia Duster',          image: '/images/Daciaduster1.png',       seats: 5, fuel: 'Diesel',  transmission: 'Manuelle', price: 400 },
   { id: 5,  name: 'Dacia Jogger',          image: '/images/Daciajogger1.png',       seats: 7, fuel: 'Diesel',  transmission: 'Manuelle', price: 400 },
   { id: 6,  name: 'Peugeot 208',           image: '/images/peugeot2081.png',        seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 300 },
-  { id: 7,  name: 'Peugeot 2008',          image: '/images/peugeot20081.png',       seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 500 },
+  { id: 7,  name: 'Peugeot 2008 GT',      image: '/images/peugeot20081.png',       seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 500 },
   { id: 8,  name: 'Renault Clio 5',        image: '/images/Clio51.png',             seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 300 },
   { id: 9,  name: 'Renault Clio 5',        image: '/images/Clio51.png',             seats: 5, fuel: 'Diesel',  transmission: 'Manuelle', price: 250 },
   { id: 10, name: 'Seat Ibiza',            image: '/images/Seatibiza1.png',         seats: 5, fuel: 'Essence', transmission: 'Manuelle', price: 400 },
@@ -40,7 +40,7 @@ const allCars = [
   { id: 13, name: 'Hyundai i20',                image: '/images/i20.png',    seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 350 },
   { id: 14, name: 'Hyundai Accent',             image: '/images/Accent.png', seats: 5, fuel: 'Essence', transmission: 'Automatique', price: 400 },
   { id: 15, name: 'Hyundai Tucson',             image: '/images/Tucson.png', seats: 5, fuel: 'Diesel',  transmission: 'Automatique', price: 500 },
-  { id: 16, name: 'Hyundai Tucson Full Option', image: '/images/Tucson.png', seats: 5, fuel: 'Diesel',  transmission: 'Automatique', price: 700 },
+  { id: 16, name: 'Hyundai Tucson Full Option', image: '/images/tucsonfullop.png', seats: 5, fuel: 'Diesel',  transmission: 'Automatique', price: 700 },
 ];
 
 const reviews = [
